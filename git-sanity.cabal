@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                git-sanity
-version:             0.1
+version:             0.0.1
 synopsis:            A sanity checker for your git history.
 description:
   This tool allow you sanity check the history of local git repository.
