@@ -30,8 +30,10 @@ main = do
   args  <- getArgs
   run args where
     check range = do
-      total <- analyze range
-      if total == 0 then exitSuccess else do
+      (exitCode, total) <- analyze range
+      if total == 0 then
+        exitWith exitCode
+      else do
         putStrLn ""
         putStrLn $ concat [name, ": ", show total, " insane commit(s)."]
         exitFailure

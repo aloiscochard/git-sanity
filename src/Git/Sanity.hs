@@ -1,14 +1,16 @@
 {-# LANGUAGE Rank2Types #-}
 module Git.Sanity where
 
+import Control.Applicative
 import Control.Monad
 import Control.Monad.IO.Class
 import Data.ByteString.Char8 (ByteString)
 import Data.Machine
 import Safe
+import System.Exit (ExitCode)
 import System.IO.Machine (IODataMode(..), byLine)
 import System.Process (CreateProcess(..), StdStream(CreatePipe), shell)
-import System.Process.Machine (ProcessMachines(..), withProcessMachines)
+import System.Process.Machine (callProcessMachines, mStdOut)
 
 import qualified Data.ByteString.Char8 as BS
 
@@ -18,14 +20,10 @@ type Range = String
 type Line = ByteString
 type Hash = ByteString
 
-analyze :: Range -> IO Int
+analyze :: Range -> IO (ExitCode, Int)
 analyze range = do
-  (exitCode, xs) <- withProcessMachines mode process $
-    \(ProcessMachines _ stdOut _) -> runT $ pipeline <~ stdOut
-  return $ length xs where
-    mode = (byLine :: IODataMode ByteString)
-    process = gitLogParents range
-    pipeline = report <~ filterInsane <~ slide <~ parseHashes
+  res <- callProcessMachines byLine (gitLogParents range) (mStdOut $ report <~ filterInsane <~ slide <~ parseHashes)
+  return $ length <$> res
 
 gitLogParents :: Range -> CreateProcess
 gitLogParents range = (shell $ concat ["git log ", range, " --parents | cat"]) { std_out = CreatePipe }
