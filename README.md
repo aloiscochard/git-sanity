@@ -32,4 +32,4 @@ Here is an example `.git/hooks/pre-push` file:
 
     git-sanity check origin/$branch..HEAD
 
-    
+Note: The hook script `pre-push` must have execution permission to be successfully called by git (`chmod +x .git/hooks/pre-push`)
