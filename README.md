@@ -21,8 +21,7 @@ Note: You might have to install binary dependencies manually as cabal does not s
 
 ## Git hook
 
-In order to integrate nicely as a pre-push githooks (http://git-scm.com/docs/githooks.html),
-a revision range of `origin/$branch..HEAD` can be used to specifies all the commits reachable from the current commit (i.e. HEAD), but not from origin.
+In order to integrate nicely as a pre-push githooks (http://git-scm.com/docs/githooks.html), a revision range of `origin/$branch~1..HEAD` can be used.
 
 Here is an example `.git/hooks/pre-push` file:
 
@@ -30,6 +29,6 @@ Here is an example `.git/hooks/pre-push` file:
 
     branch=$(git symbolic-ref --short HEAD)
 
-    git-sanity check origin/$branch..HEAD
+    git-sanity check origin/$branch~1..HEAD
 
 Note: The hook script `pre-push` must have execution permission to be successfully called by git (`chmod +x .git/hooks/pre-push`)

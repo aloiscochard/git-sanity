@@ -21,7 +21,7 @@ help = putStrLn $
           , "When no <revision range> is specified, it defaults to HEAD (i.e. the whole history leading to the current commit)."
           , ""
           , "In order to integrate nicely as a pre-push githooks (http://git-scm.com/docs/githooks.html),"
-          , "a <revision range> of 'origin/$branch..HEAD'[1] can be used to specifies all the commits reachable from the current commit (i.e. HEAD), but not from origin."
+          , "a <revision range> of 'origin/$branch~1..HEAD'[1] can be used."
           , ""
           , "[1] Where 'branch' is a variable defined as 'branch=$(git symbolic-ref --short HEAD)'" ]
 
