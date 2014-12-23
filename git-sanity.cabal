@@ -1,5 +1,5 @@
 name:                git-sanity
-version:             0.1.0.0
+version:             0.1.0.1
 synopsis:            A sanity checker for your git history.
 description:
   This tool allow you sanity check the history of local git repository.
