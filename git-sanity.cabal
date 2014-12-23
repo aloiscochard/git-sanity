@@ -24,9 +24,9 @@ library
   build-depends:
       base >=4.6 && <4.8
     , bytestring
-    , machines
-    , machines-io
-    , machines-process
+    , machines            >= 0.2.4    && < 0.5
+    , machines-io         >= 0.2      && < 0.3
+    , machines-process    >= 0.2      && < 0.3
     , process
     , safe
     , transformers
